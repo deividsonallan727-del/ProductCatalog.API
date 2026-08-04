@@ -1,0 +1,26 @@
+CREATE TABLE Products
+(
+    [Id] BIGINT IDENTITY(1,1) PRIMARY KEY,
+
+    [Name] NVARCHAR(100) NOT NULL,
+    [Description] NVARCHAR(500),
+    [Price] DECIMAL(10,2) NOT NULL,
+    [Quantity] BIGINT NOT NULL,
+
+    -- define se é Product, Book ou Game
+    [ProductType] NVARCHAR(50) NOT NULL,
+
+    -- Campos do Book
+    [Author] NVARCHAR(100),
+    [Pages] BIGINT,
+
+    -- Campos do Game
+    [Platform] NVARCHAR(100),
+    [Genre] NVARCHAR(100)
+);
+/*
+Script SQL: É uma representação da estrutura do banco de dados, mostrando como criar tabelas, 
+colunas, tipos de dados e regras. Ele também pode ser usado para criar a tabela manualmente no SQL Server. 
+No Entity Framework Core, ele não é obrigatório, pois as Migrations conseguem criar e atualizar a 
+estrutura do banco automaticamente com base nas classes e configurações do modelo.
+*/
