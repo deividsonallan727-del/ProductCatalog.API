@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProductCatalog.API.Entities
+namespace ProductCatalog.API.Entities.Products
 {
     public class Book : Product
     {
@@ -10,8 +10,8 @@ namespace ProductCatalog.API.Entities
 
         public Book() { }
 
-        public Book(string name, string description, decimal price, long quantity, string type, string author, long pages) 
-            : base(name, description, price, quantity, type)
+        public Book(string name, string description, decimal price, long quantity, string author, long pages) 
+            : base(name, description, price, quantity)
         {
             Author = author;
             Pages = pages;
@@ -44,6 +44,7 @@ namespace ProductCatalog.API.Entities
                 {
                     throw new Exception("O livro deve possuir páginas.");
                 }
+                _pages = value;
             }
             
         }

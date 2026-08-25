@@ -1,0 +1,170 @@
+﻿```html
+<!DOCTYPE html>
+<html lang="pt-BR" ng-app="productCatalog">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product Catalog</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+
+<body ng-controller="ProductController">
+
+    <main class="container">
+
+        <header class="header">
+            <h1>Product Catalog</h1>
+            <p>Cadastro de produtos</p>
+        </header>
+
+        <section class="card">
+
+            <div class="type-selector">
+
+                <button ng-class="{ active: productType === 'book' }"
+                        ng-click="selectType('book')">
+
+                    📚 Livro
+                </button>
+
+                <button ng-class="{ active: productType === 'game' }"
+                        ng-click="selectType('game')">
+
+                    🎮 Game
+                </button>
+
+            </div>
+
+            <form ng-submit="saveProduct()">
+
+                <div class="form-group">
+                    <label>Nome</label>
+
+                    <input type="text"
+                           ng-model="product.name"
+                           placeholder="Digite o nome do produto"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+
+                    <textarea ng-model="product.description"
+                              placeholder="Digite uma descrição"
+                              required>
+                    </textarea>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Preço</label>
+
+                        <input type="number"
+                               step="0.01"
+                               ng-model="product.price"
+                               placeholder="0,00"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantidade</label>
+
+                        <input type="number"
+                               ng-model="product.quantity"
+                               placeholder="0"
+                               min="0"
+                               required>
+                    </div>
+
+                </div>
+
+                <!-- CAMPOS DE LIVRO -->
+
+                <div ng-if="productType === 'book'">
+
+                    <div class="form-group">
+                        <label>Autor</label>
+
+                        <input type="text"
+                               ng-model="product.author"
+                               placeholder="Nome do autor"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Páginas</label>
+
+                        <input type="number"
+                               ng-model="product.pages"
+                               placeholder="Número de páginas"
+                               min="1"
+                               required>
+                    </div>
+
+                </div>
+
+                <!-- CAMPOS DE GAME -->
+
+                <div ng-if="productType === 'game'">
+
+                    <div class="form-group">
+                        <label>Plataforma</label>
+
+                        <input type="text"
+                               ng-model="product.platform"
+                               placeholder="Ex: PC, PS5, Xbox"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gênero</label>
+
+                        <input type="text"
+                               ng-model="product.genre"
+                               placeholder="Ex: RPG, FPS, Ação"
+                               required>
+                    </div>
+
+                </div>
+
+                <button class="save-button"
+                        type="submit"
+                        ng-disabled="loading">
+
+                    {{ loading ? 'Salvando...' : 'Cadastrar produto' }}
+
+                </button>
+
+            </form>
+
+            <div class="message success"
+                 ng-if="successMessage">
+
+                {{ successMessage }}
+
+            </div>
+
+            <div class="message error"
+                 ng-if="errorMessage">
+
+                {{ errorMessage }}
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
+```

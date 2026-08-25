@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.InteropServices;
 
-namespace ProductCatalog.API.Entities
+namespace ProductCatalog.API.Entities.Products
 {
     public class Game : Product
     {
@@ -11,8 +11,8 @@ namespace ProductCatalog.API.Entities
 
         public Game() { }
 
-        public Game(string name, string description, decimal price, long quantity, string type, string platform, string developer)
-            : base(name, description, price, quantity, type)
+        public Game(string name, string description, decimal price, long quantity, string platform, string developer)
+            : base(name, description, price, quantity)
         {
             Platform = platform;
             Genre = developer;

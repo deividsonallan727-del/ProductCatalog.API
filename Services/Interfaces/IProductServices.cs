@@ -1,7 +1,7 @@
-﻿using ProductCatalog.API.Controllers;
-using ProductCatalog.API.Entities;
+﻿using ProductCatalog.API.Entities.Products;
 
-namespace ProductCatalog.API.Services
+
+namespace ProductCatalog.API.Services.Interfaces
 {
     public interface IProductServices
     {
@@ -12,6 +12,8 @@ namespace ProductCatalog.API.Services
         List<Book> FindAllBooks();//apenas book
         List<Game> FindAllGames();//apenas jogos
         Product? Update (Product product);//atualizar
+        Book? UpdateBook(Book book);//atualizar books
+        Game? UpdateGame (Game game);//atualizar games
         bool Delete(long id);//deletar
     }
 }

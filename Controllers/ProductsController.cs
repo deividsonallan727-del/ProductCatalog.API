@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProductCatalog.API.Entities;
+using ProductCatalog.API.Entities.Products;
 using ProductCatalog.API.Model.Context;
-using ProductCatalog.API.Services;
+using ProductCatalog.API.Services.Interfaces;
 
 namespace ProductCatalog.API.Controllers
 {
@@ -42,12 +42,27 @@ namespace ProductCatalog.API.Controllers
             return Ok(product);
         }
 
-        [HttpPost("book")]
+        /*[HttpPost("book")]
         public IActionResult PostBook([FromBody] Book book)
         {
             var createdBook = _productServices.Create(book);
             return CreatedAtAction(nameof(Get), new { id = createdBook.Id }, createdBook);
           
+        }*/
+        [HttpPost("book")]
+        public IActionResult PostBook([FromBody] Book book)
+        {
+            Console.WriteLine($"Páginas recebidas: {book.Pages}");
+
+            var createdBook = _productServices.Create(book);
+
+            //Console.WriteLine($"Páginas depois do SaveChanges: {createdBook.}");
+
+            return CreatedAtAction(
+                nameof(Get),
+                new { id = createdBook.Id },
+                createdBook
+            );
         }
 
         [HttpPost("game")]
@@ -57,14 +72,15 @@ namespace ProductCatalog.API.Controllers
             return CreatedAtAction(nameof(Get), new {id = createdGame.Id}, createdGame);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, 
-            [FromBody] Product product)
+        [HttpPut("book/{id}")]
+        public IActionResult Put(long id, [FromBody] Book book)
         {
-            product.Id = id;
-            var updateProduct = _productServices.Update(product);
-            if(updateProduct == null) return NotFound();
-            return Ok(updateProduct);
+            book.Id = id;
+            var updateBook = _productServices.UpdateBook(book);
+
+            if(updateBook == null) return NotFound();
+
+            return Ok(updateBook);
         }
 
         [HttpDelete("{id}")]

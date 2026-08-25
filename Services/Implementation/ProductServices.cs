@@ -1,8 +1,9 @@
-﻿using ProductCatalog.API.Entities;
+﻿using ProductCatalog.API.Entities.Products;
 using ProductCatalog.API.Model.Context;
+using ProductCatalog.API.Services.Interfaces;
 
 
-namespace ProductCatalog.API.Services.Implementations
+namespace ProductCatalog.API.Services.Implementation
 {
     public class ProductServices : IProductServices
     {
@@ -34,16 +35,16 @@ namespace ProductCatalog.API.Services.Implementations
             return _context.Games.ToList();
         }
 
-        public Product? FindById(long id)
+        public Product FindById(long id)
         {
             return _context.Products.FirstOrDefault(p => p.Id == id);
         }
-        public Book? FindBookById(long id)
+        public Book FindBookById(long id)
         {
             return _context.Books.FirstOrDefault(b => b.Id == id);
         }
 
-        public Game? FindGameById(long id)
+        public Game FindGameById(long id)
         {
             return _context.Games.FirstOrDefault(g => g.Id == id);
         }
@@ -70,8 +71,12 @@ namespace ProductCatalog.API.Services.Implementations
             if (existingBook == null)
                 return null;
 
-            existingBook.Pages = book.Pages;
+            existingBook.Name = book.Name;
+            existingBook.Description = book.Description;
+            existingBook.Price = book.Price;
+            existingBook.Quantity = book.Quantity;
             existingBook.Author = book.Author;
+            existingBook.Pages = book.Pages;
 
             _context.SaveChanges();
 
@@ -86,6 +91,7 @@ namespace ProductCatalog.API.Services.Implementations
 
             existingGame.Platform = game.Platform;
             existingGame.Genre = game.Genre;
+
 
             return existingGame;
 
@@ -104,6 +110,7 @@ namespace ProductCatalog.API.Services.Implementations
             return true;
                
         }
+        
     }
 }
 //o fluxo fica:

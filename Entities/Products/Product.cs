@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProductCatalog.API.Entities
+namespace ProductCatalog.API.Entities.Products
 {
 
     [Table("Products")]
@@ -14,18 +14,16 @@ namespace ProductCatalog.API.Entities
         private string _description;
         private decimal _price;
         private long _quantity;
-        public string _type;
 
         public Product() { }
 
-        public Product(string name, string description, decimal price, long quantity, string type)
+        public Product(string name, string description, decimal price, long quantity)
         {
 
             Name = name;
             Description = description;
             Price = price;
             Quantity = quantity;
-            _type = type;
         }
 
         [Key]//chave pprimaria do db primarekey
